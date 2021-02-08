@@ -1,6 +1,7 @@
 """Defines the QT powered interface for configuring Stream Decks"""
 import os
 import sys
+import time
 from functools import partial
 
 from PySide2 import QtWidgets
@@ -18,7 +19,7 @@ from PySide2.QtWidgets import (
 )
 
 from streamdeck_ui import api
-from streamdeck_ui.config import LOGO, PROJECT_PATH
+from streamdeck_ui.config import LOGO, PROJECT_PATH, STATE_FILE
 from streamdeck_ui.ui_main import Ui_MainWindow
 
 BUTTON_SYTLE = """
@@ -284,6 +285,10 @@ def queue_text_change(ui, text: str) -> None:
 def start(_exit: bool = False) -> None:
     app = QApplication(sys.argv)
 
+    first_start = False
+    if not os.path.isfile(STATE_FILE):
+        first_start = True
+
     logo = QIcon(LOGO)
     main_window = MainWindow()
     ui = main_window.ui
@@ -292,8 +297,11 @@ def start(_exit: bool = False) -> None:
     tray.activated.connect(main_window.systray_clicked)
 
     menu = QMenu()
+    action_show = QAction("Show")
+    action_show.triggered.connect(main_window.show)
     action_exit = QAction("Exit")
     action_exit.triggered.connect(app.exit)
+    menu.addAction(action_show)
     menu.addAction(action_exit)
 
     tray.setContextMenu(menu)
@@ -306,6 +314,17 @@ def start(_exit: bool = False) -> None:
     ui.switch_page.valueChanged.connect(partial(update_switch_page, ui))
     ui.imageButton.clicked.connect(partial(select_image, main_window))
     ui.brightness.valueChanged.connect(partial(set_brightness, ui))
+
+    items = api.open_decks().items()
+    print("wait for device(s)")
+
+    while len(items) == 0:
+        time.sleep(3)
+        items = api.open_decks().items()
+
+    print("found " + str(len(items)))
+
+    for deck_id, deck in items:
     ui.information.currentIndexChanged.connect(partial(set_information, ui))
     for deck_id, deck in api.open_decks().items():
         ui.device_list.addItem(f"{deck['type']} - {deck_id}", userData=deck_id)
@@ -323,9 +342,12 @@ def start(_exit: bool = False) -> None:
     timer.timeout.connect(partial(sync, ui))
     timer.start(1000)
 
+    api.init_http_images()
     api.render()
     tray.show()
-    main_window.show()
+    if first_start:
+        main_window.show()
+
     if _exit:
         return
     else:
