@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'streamdeck_ui/main.ui',
 # licensing of 'streamdeck_ui/main.ui' applies.
 #
-# Created: Sat Feb 15 12:29:53 2020
+# Created: Sat Oct 31 08:17:32 2020
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,6 +36,14 @@ class Ui_MainWindow(object):
         self.label_4.setSizePolicy(sizePolicy)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_3.addWidget(self.label_4)
+        self.label_9 = QtWidgets.QLabel(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
+        self.label_9.setSizePolicy(sizePolicy)
+        self.label_9.setObjectName("label_9")
+        self.horizontalLayout_3.addWidget(self.label_9)
         self.brightness = QtWidgets.QSlider(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -139,10 +147,10 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.keys)
         self.label_6 = QtWidgets.QLabel(self.groupBox)
         self.label_6.setObjectName("label_6")
-        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_6)
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.label_6)
         self.write = QtWidgets.QPlainTextEdit(self.groupBox)
         self.write.setObjectName("write")
-        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.write)
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.write)
         self.label_8 = QtWidgets.QLabel(self.groupBox)
         self.label_8.setObjectName("label_8")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_8)
@@ -159,13 +167,23 @@ class Ui_MainWindow(object):
         self.change_brightness.setMinimum(-99)
         self.change_brightness.setObjectName("change_brightness")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.change_brightness)
+        self.label_91 = QtWidgets.QLabel(self.groupBox)
+        self.label_91.setObjectName("label_91")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_91)
+        self.information = QtWidgets.QComboBox(self.groupBox)
+        self.information.setObjectName("information")
+        self.information.addItem("")
+        self.information.addItem("")
+        self.information.addItem("")
+        self.information.addItem("")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.information)
         self.verticalLayout_3.addLayout(self.formLayout)
         self.horizontalLayout.addWidget(self.groupBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 844, 27))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 844, 22))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -191,6 +209,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "MainWindow", None, -1))
         self.label_4.setText(QtWidgets.QApplication.translate("MainWindow", "Brightness:", None, -1))
+        self.label_9.setText(QtWidgets.QApplication.translate("MainWindow", "Information:", None, -1))
         self.pages.setTabText(self.pages.indexOf(self.page_1), QtWidgets.QApplication.translate("MainWindow", "Page 1", None, -1))
         self.pages.setTabText(self.pages.indexOf(self.page_2), QtWidgets.QApplication.translate("MainWindow", "2", None, -1))
         self.pages.setTabText(self.pages.indexOf(self.page_3), QtWidgets.QApplication.translate("MainWindow", "3", None, -1))
@@ -210,8 +229,12 @@ class Ui_MainWindow(object):
         self.label_6.setText(QtWidgets.QApplication.translate("MainWindow", "Write Text:", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("MainWindow", "Switch Page:", None, -1))
         self.label_7.setText(QtWidgets.QApplication.translate("MainWindow", "Brightness +/-:", None, -1))
+        self.label_91.setText(QtWidgets.QApplication.translate("MainWindow", "Information:", None, -1))
+        self.information.setItemText(0, QtWidgets.QApplication.translate("MainWindow", "N/A", None, -1))
+        self.information.setItemText(1, QtWidgets.QApplication.translate("MainWindow", "Current Time (H:M:S)", None, -1))
+        self.information.setItemText(2, QtWidgets.QApplication.translate("MainWindow", "Current Time (H)", None, -1))
+        self.information.setItemText(3, QtWidgets.QApplication.translate("MainWindow", "Current Time (M)", None, -1))
         self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "File", None, -1))
         self.actionImport.setText(QtWidgets.QApplication.translate("MainWindow", "Import", None, -1))
         self.actionExport.setText(QtWidgets.QApplication.translate("MainWindow", "Export", None, -1))
-        self.actionExit.setText(QtWidgets.QApplication.translate("MainWindow", "Exit", None, -1))
 
